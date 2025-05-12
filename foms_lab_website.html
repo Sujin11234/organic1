@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>기능성유기분자연구실 | 서강대학교</title>
+  <style>
+    :root {
+      --gold: #d4af37;
+      --nav-bg: rgba(0, 0, 0, 0.8);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: black;
+      color: var(--gold);
+      scroll-behavior: smooth;
+    }
+
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: url('홈페이지시작이미지.png') center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+    }
+
+    .text-small, .text-medium {
+      opacity: 0;
+      animation-fill-mode: forwards;
+    }
+
+    .text-small {
+      font-size: 1.2rem;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 1s;
+    }
+
+    .text-medium {
+      font-size: 2rem;
+      font-weight: bold;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 2.5s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .menu-button {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: var(--gold);
+      font-size: 2rem;
+      z-index: 1002;
+      cursor: pointer;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease;
+      z-index: 999;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .side-menu {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 300px;
+      height: 100vh;
+      background-color: #111;
+      padding: 2rem;
+      transition: right 0.3s ease;
+      z-index: 1001;
+      overflow-y: auto;
+    }
+
+    .side-menu.active {
+      right: 0;
+    }
+
+    .side-menu h2 {
+      margin-top: 2rem;
+      font-size: 1rem;
+      color: var(--gold);
+    }
+
+    .side-menu ul {
+      list-style: none;
+      padding-left: 1rem;
+    }
+
+    .side-menu ul li {
+      margin: 0.5rem 0;
+    }
+
+    .side-menu ul li a {
+      color: #ccc;
+      text-decoration: none;
+      font-weight: normal;
+      transition: color 0.3s;
+    }
+
+    .side-menu ul li a:hover {
+      color: var(--gold);
+    }
+
+    section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem;
+      background-color: #111;
+      color: white;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    section {
+      scroll-margin-top: 80px;
+    }
+  </style>
+</head>
+<body>
+  <button class="menu-button" onclick="toggleMenu()">☰</button>
+  <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+  <div class="side-menu" id="sideMenu">
+    <h2>RESEARCH</h2>
+    <ul>
+      <li><a href="#research" onclick="closeMenuAfterClick(event)">Research Topic</a></li>
+    </ul>
+    <h2>MEMBER</h2>
+    <ul>
+      <li><a href="#professor" onclick="closeMenuAfterClick(event)">Professor</a></li>
+      <li><a href="#members" onclick="closeMenuAfterClick(event)">Alumni</a></li>
+    </ul>
+    <h2>PUBLICATIONS</h2>
+    <ul>
+      <li><a href="#publications" onclick="closeMenuAfterClick(event)">Journal</a></li>
+      <li><a href="#publications" onclick="closeMenuAfterClick(event)">Patent</a></li>
+    </ul>
+    <h2>CONTACT</h2>
+    <ul>
+      <li><a href="#contact" onclick="closeMenuAfterClick(event)">Contact Info</a></li>
+    </ul>
+  </div>
+
+  <section id="home" class="hero">
+    <div class="text-small" style="color: var(--gold);">Sogang University<br>Department of Chemistry</div>
+    <div class="text-medium" style="color: var(--gold);">Functional Organic Molecule Synthesis</div>
+  </section>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('sideMenu').classList.toggle('active');
+      document.getElementById('overlay').classList.toggle('active');
+    }
+
+    function closeMenuAfterClick(e) {
+      e.preventDefault();
+      const target = e.target.getAttribute('href');
+      toggleMenu();
+      setTimeout(() => {
+        document.querySelector(target).scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    }
+  </script>
+</body>
+</html>
